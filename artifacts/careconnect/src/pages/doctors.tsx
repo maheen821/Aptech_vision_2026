@@ -218,18 +218,27 @@ export default function Doctors() {
             <Button variant="outline" className="mt-5 rounded-xl" onClick={clearAll}>Clear All Filters</Button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((doctor, i) => (
-              <motion.div
-                key={doctor.id}
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.04 }}
-              >
-                <DoctorCard doctor={doctor} />
-              </motion.div>
-            ))}
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={specialty + search + sort}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {filtered.map((doctor, i) => (
+                <motion.div
+                  key={doctor.id}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <DoctorCard doctor={doctor} />
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         )}
       </div>
     </div>

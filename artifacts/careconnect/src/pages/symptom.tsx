@@ -195,8 +195,8 @@ export default function Symptom() {
   const matchedSpecialties = useMemo(() => getSpecialties(selected), [selected]);
   const primarySpecialty = matchedSpecialties[0] || "General Medicine";
 
-  /* fetch all doctors — we'll filter client-side across multiple specialties */
-  const { data: allDoctors } = useListDoctors({}, { query: { queryKey: getListDoctorsQueryKey({}), enabled: done } });
+  /* fetch all doctors upfront so images are ready when results appear */
+  const { data: allDoctors } = useListDoctors({}, { query: { queryKey: getListDoctorsQueryKey({}) } });
 
   const matchedDoctors = useMemo(() => {
     if (!done || !allDoctors) return [];
