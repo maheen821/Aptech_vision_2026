@@ -11,7 +11,7 @@ import { useLocation } from "wouter";
 import { motion } from "framer-motion";
 
 export default function Doctors() {
-  const [searchParams] = new URLSearchParams(window.location.search);
+  const searchParams = new URLSearchParams(window.location.search);
   const initialSpecialty = searchParams.get("specialty") || "all";
   
   const [search, setSearch] = useState("");
