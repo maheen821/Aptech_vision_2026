@@ -14,12 +14,19 @@ import {
 
 const router: IRouter = Router();
 
+function serialize(apt: Record<string, unknown>) {
+  return {
+    ...apt,
+    createdAt: apt.createdAt instanceof Date ? apt.createdAt.toISOString() : apt.createdAt,
+  };
+}
+
 router.get("/appointments", async (_req, res): Promise<void> => {
   const appointments = await db
     .select()
     .from(appointmentsTable)
     .orderBy(appointmentsTable.createdAt);
-  res.json(ListAppointmentsResponse.parse(appointments));
+  res.json(ListAppointmentsResponse.parse(appointments.map(serialize)));
 });
 
 router.post("/appointments", async (req, res): Promise<void> => {
@@ -34,7 +41,7 @@ router.post("/appointments", async (req, res): Promise<void> => {
     .values(parsed.data)
     .returning();
 
-  res.status(201).json(GetAppointmentResponse.parse(appointment));
+  res.status(201).json(GetAppointmentResponse.parse(serialize(appointment as Record<string, unknown>)));
 });
 
 router.get("/appointments/:id", async (req, res): Promise<void> => {
@@ -55,7 +62,7 @@ router.get("/appointments/:id", async (req, res): Promise<void> => {
     return;
   }
 
-  res.json(GetAppointmentResponse.parse(appointment));
+  res.json(GetAppointmentResponse.parse(serialize(appointment as Record<string, unknown>)));
 });
 
 router.patch("/appointments/:id", async (req, res): Promise<void> => {
@@ -83,7 +90,7 @@ router.patch("/appointments/:id", async (req, res): Promise<void> => {
     return;
   }
 
-  res.json(UpdateAppointmentResponse.parse(appointment));
+  res.json(UpdateAppointmentResponse.parse(serialize(appointment as Record<string, unknown>)));
 });
 
 router.delete("/appointments/:id", async (req, res): Promise<void> => {
