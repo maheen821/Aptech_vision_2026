@@ -12,6 +12,7 @@ import Symptom from "@/pages/symptom";
 import Doctors from "@/pages/doctors";
 import Appointments from "@/pages/appointments";
 import Account from "@/pages/account";
+import DoctorProfile from "@/pages/doctor-profile";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ function Router() {
         <Route path="/doctors" component={Doctors} />
         <Route path="/appointments" component={Appointments} />
         <Route path="/account" component={Account} />
+        <Route path="/doctor/:id" component={DoctorProfile} />
         <Route component={NotFound} />
       </Switch>
     </Layout>

@@ -1,0 +1,109 @@
+⭐ DOCTOR PROFILE PAGE (VIEW PROFILE) – COMPLETE CONTENT
+
+Jab user “View Profile” click kare (/doctor/:id), to ye cheezen honi chahiye:
+
+🧑‍⚕️ 1. HERO SECTION (TOP PROFILE BANNER)
+Doctor profile image (large circular / card style)
+Name: Dr. Ahmed / Dr. Sara
+Specialty: (General Physician / Dermatologist etc.)
+⭐ Rating (star system)
+Experience: “10+ Years”
+Location: Hospital / Clinic name
+
+👉 CTA Buttons:
+
+📅 Book Appointment
+💬 Chat (optional future feature)
+📊 2. QUICK INFO CARDS (IMPORTANT ⭐)
+
+Small cards grid:
+
+🏥 Hospital Affiliation
+💼 Experience (years)
+💰 Consultation Fee
+🕒 Available Timing
+📍 Location
+🩺 Specialty
+🎓 3. EDUCATION SECTION
+MBBS – University name
+FCPS / MCPS / specialization
+Certifications
+Training history
+
+👉 Use timeline UI (modern look)
+
+🩺 4. SPECIALIZATION DETAILS
+Treats diseases like:
+Fever & infections
+Skin problems
+Chronic diseases
+Medical expertise description paragraph
+📅 5. AVAILABLE TIMINGS
+
+Table or card format:
+
+Monday → 5 PM – 9 PM
+Tuesday → 6 PM – 8 PM
+Friday → 4 PM – 7 PM
+💬 6. PATIENT REVIEWS (VERY IMPORTANT ⭐)
+
+Each review card:
+
+Patient name
+⭐ Rating stars
+Comment
+Date
+
+👉 Example:
+
+“Very good doctor, listened carefully and treated well.”
+
+📈 7. SUCCESS / STATS SECTION
+Patients treated: 500+
+Success rate: 95%
+Experience: 10+ years
+📍 8. LOCATION SECTION (OPTIONAL BUT PROFESSIONAL)
+Google map embed (clinic location)
+Address text
+Contact number
+📅 9. BOOK APPOINTMENT SECTION (CTA)
+
+Big professional button:
+
+👉 “Book Appointment with Dr. Ahmed”
+
+Form preview:
+
+Select date
+Select time
+Patient name
+Contact number
+❤️ 10. WHY THIS DOCTOR SECTION (TRUST BUILDING)
+Verified Doctor Badge
+Highly Rated ⭐
+Experienced Specialist
+Trusted by 1000+ patients
+🎨 UI STYLE (IMPORTANT)
+Clean medical dashboard look
+White + blue + green theme
+Glassmorphism cards
+Smooth scroll animations
+Hover zoom on cards
+Profile image highlight glow
+⚡ FINAL RESULT
+
+Doctor profile page should feel like:
+
+✔ Hospital official profile system
+✔ Trust building medical dashboard
+✔ Clean SaaS UI
+✔ Easy booking experience
+
+💡 EXTRA IDEA (PRO LEVEL)
+
+Agar tum aur advanced chaho to add kar sakti ho:
+
+💬 Chat with doctor
+📞 Call button
+🧾 Prescription history
+⭐ Verified badge system

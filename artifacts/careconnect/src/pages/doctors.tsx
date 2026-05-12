@@ -166,15 +166,22 @@ function DoctorCard({ doctor }: { doctor: any }) {
         </div>
       </div>
 
-      <div className="p-6 pt-0 mt-auto flex items-center justify-between">
-        <div>
-          <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-0.5">Consultation</p>
-          <div className="font-bold text-gray-900 text-2xl">${doctor.fee}</div>
+      <div className="p-6 pt-0 mt-auto">
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <p className="text-xs text-gray-500 uppercase tracking-wider font-semibold mb-0.5">Consultation</p>
+            <div className="font-bold text-gray-900 text-2xl">${doctor.fee}</div>
+          </div>
+          <button
+            onClick={() => setLocation(`/doctor/${doctor.id}`)}
+            className="text-sm font-semibold text-sky-600 hover:text-sky-700 underline underline-offset-2 transition-colors"
+          >
+            View Profile
+          </button>
         </div>
-        
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-sky-600 hover:bg-sky-700 text-white shadow-md shadow-sky-200 rounded-xl px-6">
+            <Button className="w-full bg-sky-600 hover:bg-sky-700 text-white shadow-md shadow-sky-200 rounded-xl">
               Book Visit
             </Button>
           </DialogTrigger>
