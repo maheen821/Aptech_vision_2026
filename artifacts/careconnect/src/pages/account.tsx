@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useListAppointments, getListAppointmentsQueryKey } from "@workspace/api-client-react";
+import { useAuth } from "@/context/AuthContext";
+import { useLocation } from "wouter";
 
 const TABS = [
   { id: "profile",       label: "Health Profile",       icon: Heart },
@@ -109,6 +111,8 @@ function StatusBadge({ status }: { status: string }) {
 
 export default function Account() {
   const { toast } = useToast();
+  const { user, logout } = useAuth();
+  const [, setLocation] = useLocation();
   const [activeTab, setActiveTab] = useState("profile");
   const [editing, setEditing] = useState(false);
   const [rating, setRating] = useState(0);
@@ -119,6 +123,23 @@ export default function Account() {
   const { data: appointments, isLoading: aptsLoading } = useListAppointments({
     query: { queryKey: getListAppointmentsQueryKey() },
   });
+
+  if (!user) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 text-center">
+        <div className="w-20 h-20 rounded-3xl bg-sky-50 border border-sky-100 flex items-center justify-center mb-5">
+          <User className="w-9 h-9 text-sky-400" />
+        </div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">Sign in to view your account</h2>
+        <p className="text-gray-500 mb-6 max-w-sm">Create a free account or login to access your health profile, appointments, and more.</p>
+        <div className="flex gap-3">
+          <button onClick={() => setLocation("/")} className="px-6 py-2.5 border border-gray-200 rounded-xl text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">Go Home</button>
+        </div>
+      </div>
+    );
+  }
+
+  const initials = user.fullName.split(" ").map((w: string) => w[0]).slice(0, 2).join("").toUpperCase();
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
@@ -148,16 +169,13 @@ export default function Account() {
           <div className="glass-card p-8 flex flex-col items-center text-center">
             <div className="relative mb-4">
               <div className="w-24 h-24 bg-gradient-to-br from-sky-500 to-emerald-500 rounded-2xl flex items-center justify-center text-white text-3xl font-bold shadow-lg shadow-sky-200">
-                JS
+                {initials}
               </div>
-              <button className="absolute -bottom-2 -right-2 w-8 h-8 bg-sky-600 rounded-xl flex items-center justify-center text-white shadow-md hover:bg-sky-700 transition-colors">
-                <Camera className="w-4 h-4" />
-              </button>
               <div className="absolute -top-1 -left-1 w-5 h-5 bg-emerald-500 rounded-full border-2 border-white" />
             </div>
-            <h2 className="text-xl font-bold text-gray-900 mt-1">Jane Smith</h2>
-            <p className="text-xs font-semibold text-sky-600 bg-sky-50 px-3 py-1 rounded-full mt-1.5">Premium Patient</p>
-            <p className="text-xs text-gray-400 mt-2">Member since Jan 2025</p>
+            <h2 className="text-xl font-bold text-gray-900 mt-1">{user.fullName}</h2>
+            <p className="text-xs font-semibold text-sky-600 bg-sky-50 px-3 py-1 rounded-full mt-1.5">CareConnect Member</p>
+            <p className="text-xs text-gray-400 mt-2">Member since {user.createdAt}</p>
           </div>
 
           {/* Nav */}
@@ -179,7 +197,7 @@ export default function Account() {
             ))}
             <div className="pt-2 mt-2 border-t border-gray-100">
               <button
-                onClick={() => toast({ title: "Signed out", description: "You have been logged out." })}
+                onClick={() => { logout(); setLocation("/"); toast({ title: "Signed out", description: "You have been logged out." }); }}
                 className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
               >
                 <LogOut className="w-4 h-4" /> Sign Out
@@ -221,10 +239,10 @@ export default function Account() {
                     <form onSubmit={handleSave}>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         {[
-                          { label: "Full Name", value: "Jane Smith", type: "text" },
-                          { label: "Date of Birth", value: "1990-05-15", type: "date" },
-                          { label: "Phone Number", value: "(555) 123-4567", type: "tel" },
-                          { label: "Email Address", value: "jane.smith@example.com", type: "email" },
+                          { label: "Full Name", value: user.fullName, type: "text" },
+                          { label: "Date of Birth", value: "", type: "date" },
+                          { label: "Phone Number", value: user.phone, type: "tel" },
+                          { label: "Email Address", value: user.email, type: "email" },
                         ].map(({ label, value, type }) => (
                           <div key={label} className="space-y-1.5">
                             <Label className="text-xs font-bold uppercase tracking-wider text-gray-500">{label}</Label>
