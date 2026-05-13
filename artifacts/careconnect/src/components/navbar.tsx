@@ -25,7 +25,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const profileRef = useRef<HTMLDivElement>(null);
-  const { user, logout, openAuthModal } = useAuth();
+  const { user, logout } = useAuth();
 
   const navLinks = user ? authLinks : guestLinks;
 
@@ -98,18 +98,16 @@ export function Navbar() {
             {/* Guest: Login + Register buttons */}
             {!user && (
               <div className="flex items-center gap-2 ml-2">
-                <button
-                  onClick={() => openAuthModal("login")}
-                  className="px-4 py-2 text-[13px] font-semibold text-sky-700 border border-sky-200 rounded-xl hover:bg-sky-50 transition-colors"
-                >
-                  Login
-                </button>
-                <button
-                  onClick={() => openAuthModal("register")}
-                  className="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-[13px] font-semibold rounded-xl shadow-sm shadow-sky-300/40 cursor-pointer transition-colors"
-                >
-                  Register
-                </button>
+                <Link href="/login">
+                  <span className="px-4 py-2 text-[13px] font-semibold text-sky-700 border border-sky-200 rounded-xl hover:bg-sky-50 transition-colors cursor-pointer">
+                    Login
+                  </span>
+                </Link>
+                <Link href="/register">
+                  <span className="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-[13px] font-semibold rounded-xl shadow-sm shadow-sky-300/40 cursor-pointer transition-colors">
+                    Register
+                  </span>
+                </Link>
               </div>
             )}
 
@@ -198,18 +196,16 @@ export function Navbar() {
             {/* Mobile: Guest buttons */}
             {!user && (
               <div className="flex gap-2 mt-2 pt-2 border-t border-gray-100">
-                <button
-                  onClick={() => { openAuthModal("login"); setIsOpen(false); }}
-                  className="flex-1 py-3 border border-sky-200 text-sky-700 text-sm font-semibold rounded-xl hover:bg-sky-50 transition-colors"
-                >
-                  Login
-                </button>
-                <button
-                  onClick={() => { openAuthModal("register"); setIsOpen(false); }}
-                  className="flex-1 py-3 bg-sky-600 text-white text-sm font-semibold rounded-xl hover:bg-sky-700 transition-colors"
-                >
-                  Register
-                </button>
+                <Link href="/login">
+                  <span onClick={() => setIsOpen(false)} className="flex-1 block py-3 text-center border border-sky-200 text-sky-700 text-sm font-semibold rounded-xl hover:bg-sky-50 transition-colors cursor-pointer">
+                    Login
+                  </span>
+                </Link>
+                <Link href="/register">
+                  <span onClick={() => setIsOpen(false)} className="flex-1 block py-3 text-center bg-sky-600 text-white text-sm font-semibold rounded-xl hover:bg-sky-700 transition-colors cursor-pointer">
+                    Register
+                  </span>
+                </Link>
               </div>
             )}
 

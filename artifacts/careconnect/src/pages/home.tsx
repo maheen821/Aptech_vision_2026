@@ -56,9 +56,9 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <Link href="/symptom">
-                <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 rounded-full bg-sky-600 hover:bg-sky-700 shadow-lg shadow-sky-200 transition-all hover:scale-105">
-                  Check Symptoms
+              <Link href="/emergency">
+                <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 rounded-full bg-gradient-to-r from-red-600 to-rose-500 hover:from-red-700 hover:to-rose-600 shadow-lg shadow-red-300 transition-all hover:scale-105 gap-2">
+                  🚨 Emergency Call
                 </Button>
               </Link>
               <Link href="/doctors">
