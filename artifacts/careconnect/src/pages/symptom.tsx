@@ -67,7 +67,7 @@ function getSpecialties(symptoms: string[]): string[] {
 }
 
 /* fallback image if imageUrl is missing */
-const FALLBACK = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop&crop=face";
+const FALLBACK = "/images/doctor-fallback.jpg";
 
 function BookingDialog({ doctor }: { doctor: any }) {
   const [open, setOpen] = useState(false);

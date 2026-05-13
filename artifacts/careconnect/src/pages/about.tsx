@@ -34,7 +34,7 @@ const CARDS = [
     tag: "Introduction",
     title: "What is CareConnect?",
     text: "CareConnect helps patients find the right doctors easily using smart, intuitive technology. We bridge the gap between healthcare providers and the people who need them — making quality medical care accessible to everyone, everywhere.",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
+    image: "/images/about-feature-1.jpg",
     imageAlt: "Hospital consultation scene",
   },
   {
@@ -44,7 +44,7 @@ const CARDS = [
     tag: "Mission",
     title: "Our Mission",
     text: "To provide fast, reliable, and affordable healthcare access for every person. We believe no one should struggle to find a trusted doctor. Our mission is to put that power in your hands — in just a few clicks.",
-    image: "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=600&h=400&fit=crop",
+    image: "/images/about-feature-2.jpg",
     imageAlt: "Doctor helping patient",
   },
   {
@@ -54,7 +54,7 @@ const CARDS = [
     tag: "Vision",
     title: "Our Vision",
     text: "We are building the next generation of AI-powered healthcare infrastructure — a future where intelligent systems help patients get the right diagnosis, the right doctor, and the right care at exactly the right time.",
-    image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=600&h=400&fit=crop",
+    image: "/images/about-feature-3.jpg",
     imageAlt: "Futuristic AI healthcare",
   },
   {
@@ -64,16 +64,16 @@ const CARDS = [
     tag: "How It Works",
     title: "Simple 3-Step Process",
     text: "Enter your symptoms into our AI checker, receive smart doctor recommendations tailored to your condition, then instantly book an appointment online. No phone calls. No waiting rooms. Just seamless, modern healthcare.",
-    image: "https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=600&h=400&fit=crop",
+    image: "/images/about-feature-4.jpg",
     imageAlt: "AI workflow diagram",
   },
 ];
 
 const TEAM = [
-  { name: "Dr. Amanda Clarke", role: "Chief Medical Officer", image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=300&fit=crop&crop=face" },
-  { name: "Rajan Mehta", role: "CEO & Co-founder", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=face" },
-  { name: "Dr. Lin Zhou", role: "Head of AI Research", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face" },
-  { name: "Sarah Osei", role: "Product Designer", image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=300&h=300&fit=crop&crop=face" },
+  { name: "Dr. Amanda Clarke", role: "Chief Medical Officer", image: "/images/team-amanda.jpg" },
+  { name: "Rajan Mehta", role: "CEO & Co-founder", image: "/images/team-rajan.jpg" },
+  { name: "Dr. Lin Zhou", role: "Head of AI Research", image: "/images/team-lin.jpg" },
+  { name: "Sarah Osei", role: "Product Designer", image: "/images/team-sarah.jpg" },
 ];
 
 const STATS = [
@@ -90,7 +90,7 @@ export default function About() {
       {/* ── HERO ── */}
       <div className="relative h-[420px] md:h-[500px] overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1400&h=600&fit=crop"
+          src="/images/about-hero.jpg"
           alt="Hospital"
           className="absolute inset-0 w-full h-full object-cover scale-105"
         />

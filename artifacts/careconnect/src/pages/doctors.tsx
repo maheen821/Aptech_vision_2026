@@ -22,7 +22,7 @@ const SORT_OPTIONS = [
   { value: "experience", label: "Most Experienced" },
 ];
 
-const FALLBACK_IMG = "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop&crop=face";
+const FALLBACK_IMG = "/images/doctor-fallback.jpg";
 
 function sortDoctors(docs: any[], sort: string) {
   return [...docs].sort((a, b) => {

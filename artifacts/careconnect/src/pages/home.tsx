@@ -77,7 +77,7 @@ export default function Home() {
           >
             <div className="relative">
               <div className="glass-card p-4 relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500">
-                <img src="https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&q=80&w=800&h=600" alt="Doctor consulting patient" className="rounded-2xl object-cover w-full h-[400px] shadow-sm" />
+                <img src="/images/hero-doctor.jpg" alt="Doctor consulting patient" className="rounded-2xl object-cover w-full h-[400px] shadow-sm" />
               </div>
               
               <div className="absolute -left-12 top-20 glass-card p-4 flex items-center gap-4 z-20 animate-bounce" style={{ animationDuration: '3s' }}>
@@ -190,7 +190,7 @@ export default function Home() {
       {/* CTA */}
       <section className="w-full py-24 px-4">
         <div className="container mx-auto max-w-4xl text-center glass-card p-12 md:p-20 bg-gradient-to-br from-sky-500 to-emerald-400 border-none relative overflow-hidden">
-          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+          <div className="absolute inset-0 bg-[url('/images/cubes.png')] opacity-10"></div>
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-white mb-6 relative z-10">Ready to take control of your health?</h2>
           <p className="text-sky-50 text-lg mb-10 max-w-2xl mx-auto relative z-10">Join thousands of patients who have already transformed their healthcare experience with CareConnect.</p>
           <div className="relative z-10">
