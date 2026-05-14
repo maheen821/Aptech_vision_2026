@@ -1,0 +1,163 @@
+4. SPECIALTIES SECTION (CLICKABLE CATEGORIES)
+
+Create a modern grid of clickable specialty cards.
+
+Cards:
+❤️ Cardiologist
+🧠 Neurologist
+🦴 Orthopedic
+🧴 Dermatologist
+👶 Pediatrician
+🫁 Pulmonologist
+UI DESIGN:
+
+Each card must include:
+
+Medical icon
+Specialty name
+Small description (e.g. “Heart specialist”)
+Hover glow effect
+Soft shadow glass card
+CLICK ACTION:
+
+👉 On click → navigate to:
+/doctors?specialty=cardiologist
+
+OR open filtered doctor list page.
+
+ANIMATION:
+Fade-in grid
+Hover lift effect
+Icon pulse animation
+💬 8. PATIENT REVIEWS SECTION ⭐
+
+Create a modern testimonial slider.
+
+CARD DESIGN:
+
+Each review card includes:
+
+👤 User profile image
+Name
+⭐ Star rating (1–5)
+Review text
+Date (optional)
+EXAMPLE TEXT:
+“Very helpful doctor, smooth booking experience”
+“AI symptom checker is amazing”
+UI STYLE:
+Glass card design
+Soft shadows
+Rounded avatar images
+Clean typography
+ANIMATION:
+Carousel slider (auto scroll)
+Smooth swipe effect
+Fade transition between cards
+🧠 9. HEALTH INSIGHTS / BLOG SECTION ⭐
+
+Create a modern blog/article card grid.
+
+BLOG CARDS:
+
+Each card includes:
+
+🖼️ Image (medical/health related)
+Title:
+“How to control fever”
+“Heart health tips”
+“Healthy diet guide”
+“Skin care routine”
+Short description
+Read more button
+UI STYLE:
+Image top card layout
+Glassmorphism hover effect
+Soft zoom on hover
+Clean spacing
+ANIMATION:
+Scroll fade-in
+Card hover zoom
+Smooth entrance animation
+🏥 11. PARTNER HOSPITALS / CLINICS SECTION
+
+Create a trust-building logo grid section.
+
+CONTENT:
+Hospital logos
+Clinic logos
+Medical partner brands
+UI STYLE:
+Minimal white background
+Soft glowing border cards
+Grayscale logos → color on hover
+Smooth hover scale effect
+EXTRA TRUST BADGES:
+
+Add badges like:
+
+✔ Verified Hospitals
+✔ Trusted Clinics
+✔  Verified Network
+📞 13. CONTACT / SUPPORT SECTION
+
+Create a modern support section with 2-column layout.
+
+LEFT SIDE:
+📞 Contact Info Cards:
+📧 Email Support
+📱 Phone Number
+🕒 Working Hours
+💬 Live Chat Button
+
+Each in glass cards with icons.
+
+RIGHT SIDE:
+📝 CONTACT FORM:
+
+Fields:
+
+Name
+Email
+Message
+
+Button:
+
+“Send Message”
+UI STYLE:
+Glassmorphism form card
+Soft blue gradient background
+Clean input fields with focus glow
+LIVE CHAT FEATURE:
+
+Button:
+💬 “Start Live Chat”
+
+👉 Opens chat modal UI (frontend only)
+
+ANIMATIONS:
+Form fade-in
+Button hover glow
+Smooth transitions
+Floating icons
+🎨 GLOBAL UI STYLE (IMPORTANT)
+
+Use throughout all sections:
+
+Glassmorphism cards (blur + transparency)
+Light hospital palette (blue + green + white)
+Rounded corners (16px–24px)
+Soft shadows
+Smooth scroll animations
+Hover lift + glow effects
+Mobile responsive layout
+🏆 FINAL OUTPUT
+
+Create a premium healthcare SaaS homepage UI sections system with:
+
+✔ Specialties clickable cards
+✔ Patient testimonials slider
+✔ Health blog section
+✔ Partner hospitals trust section
+✔ Contact + live chat system UI
+✔ Fully modern animated hospital theme This prompt includes ALL existing home page sections + new advanced sections merged together.

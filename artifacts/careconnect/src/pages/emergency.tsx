@@ -9,30 +9,41 @@ import {
 
 /* ─── DATA ─────────────────────────────────────────────── */
 
+const HOSP_IMGS = [
+  "https://images.pexels.com/photos/668300/pexels-photo-668300.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/1250655/pexels-photo-1250655.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/3376790/pexels-photo-3376790.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/4167541/pexels-photo-4167541.jpeg?auto=compress&cs=tinysrgb&w=800",
+  "https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?auto=compress&cs=tinysrgb&w=800",
+];
+
+const mapsLink = (address: string) => `https://www.google.com/maps/search/${encodeURIComponent(address)}`;
+
 const ALL_HOSPITALS: Record<string, any[]> = {
   default: [
-    { id: 1, name: "City General Hospital", area: "Downtown", address: "123 Main St", distance: "0.4 mi", open: true, phone: "+1 (212) 555-0101", rating: 4.8, reviews: 1240, services: ["ICU", "Trauma", "ER"], image: "/images/service-emergency.jpg" },
-    { id: 2, name: "St. Mary's Medical Center", area: "Midtown", address: "456 Park Ave", distance: "0.8 mi", open: true, phone: "+1 (212) 555-0202", rating: 4.6, reviews: 980, services: ["Cardiac", "Pediatric", "ER"], image: "/images/about-hero.jpg" },
-    { id: 3, name: "Metropolitan Hospital", area: "Uptown", address: "789 Broadway", distance: "1.2 mi", open: true, phone: "+1 (212) 555-0303", rating: 4.7, reviews: 1560, services: ["Neuro", "Orthopedic", "ER"], image: "/images/about-feature-1.jpg" },
-    { id: 4, name: "Downtown Emergency Clinic", area: "Financial Dist.", address: "321 5th Ave", distance: "1.7 mi", open: false, phone: "+1 (212) 555-0404", rating: 4.4, reviews: 720, services: ["ER", "Urgent Care"], image: "/images/about-feature-2.jpg" },
+    { id: 1, name: "City General Hospital", area: "Downtown", address: "123 Main St, Downtown", distance: "0.4 mi", open: true, phone: "+1 (212) 555-0101", rating: 4.8, reviews: 1240, services: ["ICU", "Trauma", "ER"], image: HOSP_IMGS[0] },
+    { id: 2, name: "St. Mary's Medical Center", area: "Midtown", address: "456 Park Ave, Midtown", distance: "0.8 mi", open: true, phone: "+1 (212) 555-0202", rating: 4.6, reviews: 980, services: ["Cardiac", "Pediatric", "ER"], image: HOSP_IMGS[1] },
+    { id: 3, name: "Metropolitan Hospital", area: "Uptown", address: "789 Broadway, Uptown", distance: "1.2 mi", open: true, phone: "+1 (212) 555-0303", rating: 4.7, reviews: 1560, services: ["Neuro", "Orthopedic", "ER"], image: HOSP_IMGS[2] },
+    { id: 4, name: "Downtown Emergency Clinic", area: "Financial Dist.", address: "321 5th Ave, Financial District", distance: "1.7 mi", open: false, phone: "+1 (212) 555-0404", rating: 4.4, reviews: 720, services: ["ER", "Urgent Care"], image: HOSP_IMGS[3] },
   ],
   karachi: [
     { id: 1, name: "Aga Khan University Hospital", area: "Stadium Road", address: "Stadium Rd, Karachi", distance: "0.6 mi", open: true, phone: "+92 21 3493 0051", rating: 4.9, reviews: 5200, services: ["ICU", "Trauma", "Cardiac"], image: "/images/service-emergency.jpg" },
     { id: 2, name: "Liaquat National Hospital", area: "Gulshan", address: "Liaquat Natnl Hospital Rd", distance: "1.1 mi", open: true, phone: "+92 21 3412 1011", rating: 4.7, reviews: 3100, services: ["ER", "Neuro", "Orthopedic"], image: "/images/about-hero.jpg" },
-    { id: 3, name: "Ziauddin Hospital", area: "Clifton", address: "4/B Shahra-e-Ghalib", distance: "1.8 mi", open: true, phone: "+92 21 111 000 260", rating: 4.6, reviews: 2700, services: ["Cardiac", "ICU", "ER"], image: "/images/about-feature-1.jpg" },
-    { id: 4, name: "South City Hospital", area: "DHA", address: "Block 7, Clifton", distance: "2.3 mi", open: false, phone: "+92 21 3589 8901", rating: 4.4, reviews: 1100, services: ["ER", "Pediatric"], image: "/images/about-feature-2.jpg" },
+    { id: 3, name: "Ziauddin Hospital", area: "Clifton", address: "4/B Shahra-e-Ghalib, Clifton, Karachi", distance: "1.8 mi", open: true, phone: "+92 21 111 000 260", rating: 4.6, reviews: 2700, services: ["Cardiac", "ICU", "ER"], image: HOSP_IMGS[2] },
+    { id: 4, name: "South City Hospital", area: "DHA", address: "Block 7, Clifton, Karachi", distance: "2.3 mi", open: false, phone: "+92 21 3589 8901", rating: 4.4, reviews: 1100, services: ["ER", "Pediatric"], image: HOSP_IMGS[3] },
   ],
   gulshan: [
-    { id: 1, name: "Liaquat National Hospital", area: "Gulshan-e-Iqbal", address: "Liaquat National Hospital Rd", distance: "0.3 mi", open: true, phone: "+92 21 3412 1011", rating: 4.8, reviews: 3100, services: ["ER", "Trauma", "ICU"], image: "/images/service-emergency.jpg" },
-    { id: 2, name: "Gulshan Medical Center", area: "Gulshan Block 6", address: "Block 6, PECHS", distance: "0.7 mi", open: true, phone: "+92 21 3498 0012", rating: 4.5, reviews: 860, services: ["ER", "Urgent Care"], image: "/images/about-hero.jpg" },
+    { id: 1, name: "Liaquat National Hospital", area: "Gulshan-e-Iqbal", address: "Liaquat National Hospital Rd, Gulshan, Karachi", distance: "0.3 mi", open: true, phone: "+92 21 3412 1011", rating: 4.8, reviews: 3100, services: ["ER", "Trauma", "ICU"], image: HOSP_IMGS[4] },
+    { id: 2, name: "Gulshan Medical Center", area: "Gulshan Block 6", address: "Block 6 Gulshan-e-Iqbal, Karachi", distance: "0.7 mi", open: true, phone: "+92 21 3498 0012", rating: 4.5, reviews: 860, services: ["ER", "Urgent Care"], image: HOSP_IMGS[5] },
   ],
   dha: [
-    { id: 1, name: "South City Hospital", area: "DHA Phase 2", address: "Block 7, Clifton", distance: "0.4 mi", open: true, phone: "+92 21 3589 8901", rating: 4.6, reviews: 1100, services: ["ER", "Pediatric", "ICU"], image: "/images/service-emergency.jpg" },
-    { id: 2, name: "Shifa International (DHA)", area: "DHA Phase 6", address: "Plot 62 DHA", distance: "1.2 mi", open: true, phone: "+92 21 3599 1234", rating: 4.7, reviews: 1900, services: ["Cardiac", "Trauma", "ER"], image: "/images/about-feature-3.jpg" },
+    { id: 1, name: "South City Hospital", area: "DHA Phase 2", address: "Block 7 Clifton DHA, Karachi", distance: "0.4 mi", open: true, phone: "+92 21 3589 8901", rating: 4.6, reviews: 1100, services: ["ER", "Pediatric", "ICU"], image: HOSP_IMGS[0] },
+    { id: 2, name: "Shifa International (DHA)", area: "DHA Phase 6", address: "Plot 62 DHA Phase 6, Karachi", distance: "1.2 mi", open: true, phone: "+92 21 3599 1234", rating: 4.7, reviews: 1900, services: ["Cardiac", "Trauma", "ER"], image: HOSP_IMGS[1] },
   ],
   "north nazimabad": [
-    { id: 1, name: "Abbasi Shaheed Hospital", area: "North Nazimabad", address: "Block B, N. Nazimabad", distance: "0.5 mi", open: true, phone: "+92 21 3661 2345", rating: 4.4, reviews: 890, services: ["ER", "ICU"], image: "/images/service-emergency.jpg" },
-    { id: 2, name: "Hussaini Hospital", area: "Abbas Town", address: "Abbas Town, Karachi", distance: "0.9 mi", open: true, phone: "+92 21 3663 4567", rating: 4.3, reviews: 740, services: ["ER", "Urgent Care"], image: "/images/about-feature-4.jpg" },
+    { id: 1, name: "Abbasi Shaheed Hospital", area: "North Nazimabad", address: "Block B North Nazimabad, Karachi", distance: "0.5 mi", open: true, phone: "+92 21 3661 2345", rating: 4.4, reviews: 890, services: ["ER", "ICU"], image: HOSP_IMGS[2] },
+    { id: 2, name: "Hussaini Hospital", area: "Abbas Town", address: "Abbas Town, Karachi", distance: "0.9 mi", open: true, phone: "+92 21 3663 4567", rating: 4.3, reviews: 740, services: ["ER", "Urgent Care"], image: HOSP_IMGS[3] },
   ],
 };
 
@@ -431,7 +442,7 @@ function HospitalCard({ h, onMap, onCall, onChat }: { h: any; onMap: () => void;
 
         <div className="grid grid-cols-3 gap-2">
           {[
-            { label: "View Map", icon: MapPin, color: "bg-blue-500/10 border-blue-500/20 text-blue-400 hover:bg-blue-500/20", action: onMap },
+            { label: "View Map", icon: MapPin, color: "bg-blue-500/10 border-blue-500/20 text-blue-400 hover:bg-blue-500/20", action: () => window.open(mapsLink(h.address), "_blank") },
             { label: "Call", icon: PhoneCall, color: "bg-emerald-500/10 border-emerald-500/20 text-emerald-400 hover:bg-emerald-500/20", action: onCall },
             { label: "Chat", icon: MessageCircle, color: "bg-sky-500/10 border-sky-500/20 text-sky-400 hover:bg-sky-500/20", action: onChat },
           ].map(({ label, icon: Icon, color, action }) => (
@@ -565,8 +576,8 @@ export default function Emergency() {
           className="absolute inset-0"
         >
           <img
-            src="/images/service-emergency.jpg"
-            alt="Emergency"
+            src="/images/ambulance-hero.jpg"
+            alt="Emergency Ambulance"
             className="w-full h-full object-cover object-center"
           />
         </motion.div>

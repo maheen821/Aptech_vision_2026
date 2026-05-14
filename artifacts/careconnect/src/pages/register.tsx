@@ -26,22 +26,22 @@ interface FieldProps {
 function Field({ label, type = "text", value, onChange, placeholder, icon: Icon, error, rightSlot }: FieldProps) {
   return (
     <div className="space-y-1.5">
-      <label className="block text-xs font-bold uppercase tracking-wider text-sky-700/80">
+      <label className="block text-xs font-bold uppercase tracking-wider text-gray-600">
         {label}
       </label>
-      <div className={`relative flex items-center rounded-2xl border-2 transition-all duration-200 bg-white/70 backdrop-blur-sm ${
+      <div className={`relative flex items-center rounded-2xl border-2 transition-all duration-200 bg-white/80 backdrop-blur-sm ${
         error
           ? "border-red-400 ring-2 ring-red-100"
-          : "border-sky-100 focus-within:border-sky-400 focus-within:ring-2 focus-within:ring-sky-100 focus-within:bg-white"
+          : "border-gray-200 focus-within:border-sky-400 focus-within:ring-2 focus-within:ring-sky-100 focus-within:bg-white"
       }`}>
-        <Icon className="absolute left-3.5 w-4 h-4 text-sky-400 shrink-0" />
+        <Icon className="absolute left-3.5 w-4 h-4 text-sky-500 shrink-0" />
         <input
           type={type}
           value={value}
           onChange={e => onChange(e.target.value)}
           placeholder={placeholder}
           autoComplete="off"
-          className="w-full h-12 pl-10 pr-10 bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none font-medium"
+          className="w-full h-12 pl-10 pr-10 bg-transparent text-sm text-gray-900 placeholder-gray-400 outline-none font-medium"
         />
         {rightSlot && <div className="absolute right-3.5">{rightSlot}</div>}
       </div>
@@ -178,7 +178,7 @@ export default function RegisterPage() {
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.15, type: "spring", stiffness: 200 }}
-                className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-sky-400 to-cyan-500 flex items-center justify-center shadow-xl shadow-sky-200/60 mb-4"
+                className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-sky-500 to-emerald-500 flex items-center justify-center shadow-xl shadow-sky-200/60 mb-4"
               >
                 <Stethoscope className="w-8 h-8 text-white" strokeWidth={2} />
               </motion.div>
@@ -191,7 +191,7 @@ export default function RegisterPage() {
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }}
-                className="text-sm text-sky-500 font-medium"
+                className="text-sm text-gray-500 font-medium"
               >
                 Join Smart Healthcare System
               </motion.p>
@@ -204,8 +204,8 @@ export default function RegisterPage() {
                   { icon: Heart, label: "Free to Join" },
                   { icon: CheckCircle2, label: "Instant Access" },
                 ].map(({ icon: Icon, label }) => (
-                  <span key={label} className="flex items-center gap-1 text-[11px] text-sky-400 font-medium">
-                    <Icon className="w-3 h-3" /> {label}
+                  <span key={label} className="flex items-center gap-1 text-[11px] text-gray-500 font-medium">
+                    <Icon className="w-3 h-3 text-sky-500" /> {label}
                   </span>
                 ))}
               </motion.div>
@@ -214,8 +214,8 @@ export default function RegisterPage() {
             {/* Divider */}
             <div className="flex items-center gap-3 mb-6">
               <div className="flex-1 h-px bg-gradient-to-r from-transparent via-sky-200 to-transparent" />
-              <span className="text-xs text-sky-300 font-medium uppercase tracking-widest">Personal Info</span>
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-sky-200 to-transparent" />
+              <span className="text-xs text-gray-400 font-bold uppercase tracking-widest">Personal Info</span>
+              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
             </div>
 
             {/* Form */}
@@ -251,9 +251,9 @@ export default function RegisterPage() {
               />
 
               <div className="flex items-center gap-3 pt-1 pb-0.5">
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-sky-200 to-transparent" />
-                <span className="text-xs text-sky-300 font-medium uppercase tracking-widest">Security</span>
-                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-sky-200 to-transparent" />
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
+                <span className="text-xs text-gray-400 font-bold uppercase tracking-widest">Security</span>
+                <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent" />
               </div>
 
               <div className="space-y-1.5">
