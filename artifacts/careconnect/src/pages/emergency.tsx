@@ -511,6 +511,9 @@ export default function Emergency() {
   const [searched, setSearched] = useState(false);
   const [locating, setLocating] = useState(false);
 
+  const [contactModal, setContactModal] = useState(false);
+  const hospitalsRef = useRef<HTMLDivElement>(null);
+
   const [callEntity, setCallEntity] = useState<{ entity: any; type: "doctor" | "hospital" } | null>(null);
   const [chatEntity, setChatEntity] = useState<{ entity: any; type: "doctor" | "hospital" } | null>(null);
   const [mapHospital, setMapHospital] = useState<any | null>(null);
@@ -552,51 +555,145 @@ export default function Emergency() {
   return (
     <div className="w-full bg-slate-950 min-h-screen pb-24 overflow-x-hidden">
 
-      {/* ── HERO ── */}
-      <div className="relative overflow-hidden pt-20 pb-24 px-4">
-        {/* Background layers */}
-        <div className="absolute inset-0 bg-gradient-to-br from-red-950/80 via-slate-950 to-blue-950/60" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(239,68,68,0.15),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(37,99,235,0.1),transparent_50%)]" />
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/60 to-transparent" />
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-red-600/10 rounded-full blur-3xl" />
+      {/* ── CINEMATIC HERO ── */}
+      <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Cinematic background image with slow zoom */}
+        <motion.div
+          initial={{ scale: 1.12 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 12, ease: "linear", repeat: Infinity, repeatType: "reverse" }}
+          className="absolute inset-0"
+        >
+          <img
+            src="/images/service-emergency.jpg"
+            alt="Emergency"
+            className="w-full h-full object-cover object-center"
+          />
+        </motion.div>
 
-        <div className="container mx-auto max-w-4xl relative text-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 border border-red-500/30 bg-red-500/10 text-red-400 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-8 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              <ShieldAlert className="w-3.5 h-3.5" /> Emergency Services — 24 / 7
-            </div>
+        {/* Dark cinematic overlays */}
+        <div className="absolute inset-0 bg-gradient-to-br from-red-950/90 via-slate-950/80 to-blue-950/85" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(239,68,68,0.25),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(37,99,235,0.2),transparent_50%)]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
 
-            <h1 className="text-5xl md:text-7xl font-black text-white mb-4 leading-tight tracking-tight">
-              Emergency
-              <span className="block bg-gradient-to-r from-red-400 via-rose-400 to-orange-400 bg-clip-text text-transparent">Assistance</span>
-            </h1>
+        {/* Neon top bar */}
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent" style={{ boxShadow: "0 0 20px rgba(239,68,68,0.8)" }} />
 
-            <p className="text-slate-400 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
-              Get immediate medical help, connect with emergency doctors, and find nearby hospitals instantly.
-            </p>
+        {/* Floating emergency particles */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div key={i}
+            className="absolute w-1.5 h-1.5 rounded-full bg-red-500/60"
+            style={{ left: `${15 + i * 14}%`, top: `${20 + (i % 3) * 20}%` }}
+            animate={{ y: [-10, 10, -10], opacity: [0.3, 0.8, 0.3] }}
+            transition={{ duration: 2.5 + i * 0.4, repeat: Infinity, delay: i * 0.3 }}
+          />
+        ))}
 
-            {/* CTA row */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="tel:911"
-                className="relative group flex items-center gap-3 px-8 py-4 bg-red-600 hover:bg-red-500 text-white font-black text-lg rounded-2xl shadow-2xl shadow-red-900/60 transition-all hover:scale-105 overflow-hidden">
-                <span className="absolute inset-0 bg-gradient-to-r from-red-600 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="relative w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                  <Phone className="w-5 h-5 animate-pulse" />
-                </div>
-                <span className="relative">Call 911 — Emergency</span>
-              </a>
-              <button onClick={findNearby} disabled={locating}
-                className="flex items-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-white/30 text-white font-bold text-base rounded-2xl transition-all hover:scale-105 disabled:opacity-50 backdrop-blur-sm">
-                {locating ? <Loader2 className="w-5 h-5 animate-spin" /> : <Navigation className="w-5 h-5" />}
-                {locating ? "Locating…" : "Find Hospitals Near Me"}
-              </button>
-            </div>
-          </motion.div>
+        {/* Glassmorphism content card */}
+        <div className="relative z-10 w-full px-4 pt-20">
+          <div className="container mx-auto max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12 text-center shadow-2xl"
+              style={{ boxShadow: "0 0 80px rgba(239,68,68,0.15), 0 0 40px rgba(0,0,0,0.4), inset 0 0 60px rgba(255,255,255,0.02)" }}
+            >
+              {/* Badge */}
+              <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-2 border border-red-500/40 bg-red-500/10 text-red-300 text-xs font-bold uppercase tracking-widest px-5 py-2.5 rounded-full mb-8 backdrop-blur-sm">
+                <span className="relative flex w-2 h-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full w-2 h-2 bg-red-500" />
+                </span>
+                <ShieldAlert className="w-3.5 h-3.5" /> Emergency Services — 24 / 7
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+                className="text-5xl md:text-7xl font-black text-white mb-4 leading-tight tracking-tight"
+              >
+                🚨 Emergency
+                <span className="block bg-gradient-to-r from-red-400 via-rose-300 to-orange-400 bg-clip-text text-transparent"
+                  style={{ textShadow: "none", filter: "drop-shadow(0 0 20px rgba(239,68,68,0.4))" }}>
+                  Assistance
+                </span>
+              </motion.h1>
+
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
+                className="text-slate-300 text-lg max-w-xl mx-auto mb-10 leading-relaxed">
+                Get immediate medical help, connect with emergency doctors, and find nearby hospitals instantly.
+              </motion.p>
+
+              {/* CTA row */}
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}
+                className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                  onClick={() => hospitalsRef.current?.scrollIntoView({ behavior: "smooth" })}
+                  className="relative group flex items-center gap-3 px-8 py-4 bg-red-600 hover:bg-red-500 text-white font-black text-base rounded-2xl shadow-2xl shadow-red-900/60 transition-all hover:scale-105 overflow-hidden"
+                  style={{ boxShadow: "0 0 30px rgba(239,68,68,0.4)" }}
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-red-500 to-rose-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="relative w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
+                    <Search className="w-4 h-4" />
+                  </div>
+                  <span className="relative">Find Emergency Help</span>
+                </button>
+
+                <button
+                  onClick={() => setContactModal(true)}
+                  className="flex items-center gap-3 px-8 py-4 bg-white/8 hover:bg-white/15 border border-white/20 hover:border-red-400/50 text-white font-bold text-base rounded-2xl transition-all hover:scale-105 backdrop-blur-sm"
+                >
+                  <Phone className="w-5 h-5 text-red-400" />
+                  Emergency Contact
+                </button>
+              </motion.div>
+
+              {/* Scroll hint */}
+              <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}
+                className="mt-10 flex flex-col items-center gap-1 text-slate-500 text-xs">
+                <span>scroll down</span>
+                <div className="w-px h-8 bg-gradient-to-b from-slate-500 to-transparent" />
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
+
+      {/* ── EMERGENCY CONTACT MODAL ── */}
+      <AnimatePresence>
+        {contactModal && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-md p-4">
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }}
+              className="w-full max-w-sm bg-slate-900 border border-white/10 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="h-1 bg-gradient-to-r from-red-500 to-rose-400" />
+              <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+                <h3 className="font-bold text-white flex items-center gap-2"><Phone className="w-4 h-4 text-red-400" /> Emergency Contacts</h3>
+                <button onClick={() => setContactModal(false)} className="w-8 h-8 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white"><X className="w-4 h-4" /></button>
+              </div>
+              <div className="p-5 space-y-3">
+                {[
+                  { label: "Emergency (Police/Fire/Ambulance)", number: "911", color: "bg-red-600 hover:bg-red-500" },
+                  { label: "Poison Control Center", number: "1-800-222-1222", color: "bg-orange-600 hover:bg-orange-500" },
+                  { label: "CareConnect Hotline", number: "1-800-CARE-NOW", color: "bg-sky-600 hover:bg-sky-500" },
+                  { label: "Mental Health Crisis Line", number: "988", color: "bg-purple-600 hover:bg-purple-500" },
+                ].map(({ label, number, color }) => (
+                  <a key={number} href={`tel:${number.replace(/[^0-9+]/g, "")}`}
+                    className={`flex items-center justify-between px-4 py-3.5 ${color} text-white rounded-2xl transition-all hover:scale-[1.02] group`}>
+                    <div>
+                      <p className="text-xs text-white/70 mb-0.5">{label}</p>
+                      <p className="font-black text-lg">{number}</p>
+                    </div>
+                    <Phone className="w-5 h-5 opacity-70 group-hover:opacity-100" />
+                  </a>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── ALERT BOX ── */}
       <div className="container mx-auto max-w-4xl px-4 -mt-6 mb-10 relative z-10">
@@ -616,7 +713,7 @@ export default function Emergency() {
       </div>
 
       {/* ── HOSPITAL SEARCH ── */}
-      <div className="container mx-auto max-w-5xl px-4 mb-14">
+      <div ref={hospitalsRef} className="container mx-auto max-w-5xl px-4 mb-14">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
           className="bg-white/3 border border-white/10 rounded-3xl p-6 backdrop-blur-sm">
           <h2 className="text-xl font-bold text-white mb-1 flex items-center gap-2">

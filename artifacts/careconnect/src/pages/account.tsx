@@ -120,6 +120,14 @@ export default function Account() {
   const [submitting, setSubmitting] = useState(false);
   const [notifications, setNotifications] = useState({ appointments: true, promotions: false, updates: true });
 
+  const storageKey = user ? `careconnect_health_${user.email}` : null;
+  const [age, setAge] = useState(() => storageKey ? (localStorage.getItem(storageKey + "_age") ?? "") : "");
+  const [bloodGroup, setBloodGroup] = useState(() => storageKey ? (localStorage.getItem(storageKey + "_blood") ?? "") : "");
+  const [height, setHeight] = useState(() => storageKey ? (localStorage.getItem(storageKey + "_height") ?? "") : "");
+  const [weight, setWeight] = useState(() => storageKey ? (localStorage.getItem(storageKey + "_weight") ?? "") : "");
+  const [medicalHistory, setMedicalHistory] = useState(() => storageKey ? (localStorage.getItem(storageKey + "_history") ?? "") : "");
+  const [knownAllergies, setKnownAllergies] = useState(() => storageKey ? (localStorage.getItem(storageKey + "_allergies") ?? "") : "");
+
   const { data: appointments, isLoading: aptsLoading } = useListAppointments({
     query: { queryKey: getListAppointmentsQueryKey() },
   });
@@ -143,6 +151,14 @@ export default function Account() {
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
+    if (storageKey) {
+      localStorage.setItem(storageKey + "_age", age);
+      localStorage.setItem(storageKey + "_blood", bloodGroup);
+      localStorage.setItem(storageKey + "_height", height);
+      localStorage.setItem(storageKey + "_weight", weight);
+      localStorage.setItem(storageKey + "_history", medicalHistory);
+      localStorage.setItem(storageKey + "_allergies", knownAllergies);
+    }
     setEditing(false);
     toast({ title: "Profile saved", description: "Your health profile has been updated." });
   };
@@ -251,33 +267,83 @@ export default function Account() {
                         ))}
                       </div>
 
-                      {/* Medical info */}
+                      {/* Medical info — editable */}
                       <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
                         {[
-                          { label: "Age", value: "35 years" },
-                          { label: "Blood Group", value: "O+" },
-                          { label: "Height / Weight", value: "165 cm / 62 kg" },
-                        ].map(({ label, value }) => (
-                          <div key={label} className={`p-4 rounded-2xl border text-center ${editing ? "border-sky-200 bg-sky-50/50" : "border-gray-100 bg-gray-50/60"}`}>
-                            <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-1">{label}</p>
-                            <p className="font-bold text-gray-900">{value}</p>
+                          { label: "Age", value: age, set: setAge, placeholder: "e.g. 28 years", unit: "" },
+                          { label: "Blood Group", value: bloodGroup, set: setBloodGroup, placeholder: "e.g. O+", unit: "" },
+                          { label: "Height (cm)", value: height, set: setHeight, placeholder: "e.g. 170", unit: "cm" },
+                        ].map(({ label, value, set, placeholder }) => (
+                          <div key={label} className={`p-4 rounded-2xl border ${editing ? "border-sky-300 bg-sky-50/60" : "border-gray-100 bg-gray-50/60"}`}>
+                            <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">{label}</p>
+                            {editing ? (
+                              <input
+                                type="text"
+                                value={value}
+                                onChange={e => set(e.target.value)}
+                                placeholder={placeholder}
+                                className="w-full bg-white border border-sky-200 rounded-lg px-3 py-2 text-sm font-bold text-gray-900 outline-none focus:ring-2 focus:ring-sky-300 transition"
+                              />
+                            ) : (
+                              <p className={`font-bold text-sm ${value ? "text-gray-900" : "text-gray-400 italic"}`}>
+                                {value || "Not set"}
+                              </p>
+                            )}
                           </div>
                         ))}
+                      </div>
+
+                      {/* Weight row */}
+                      <div className="mt-4">
+                        <div className={`p-4 rounded-2xl border ${editing ? "border-sky-300 bg-sky-50/60" : "border-gray-100 bg-gray-50/60"}`}>
+                          <p className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-2">Weight (kg)</p>
+                          {editing ? (
+                            <input
+                              type="text"
+                              value={weight}
+                              onChange={e => setWeight(e.target.value)}
+                              placeholder="e.g. 65"
+                              className="w-full bg-white border border-sky-200 rounded-lg px-3 py-2 text-sm font-bold text-gray-900 outline-none focus:ring-2 focus:ring-sky-300 transition"
+                            />
+                          ) : (
+                            <p className={`font-bold text-sm ${weight ? "text-gray-900" : "text-gray-400 italic"}`}>
+                              {weight || "Not set"}
+                            </p>
+                          )}
+                        </div>
                       </div>
 
                       <div className="mt-5 space-y-3">
                         <div className="space-y-1.5">
                           <Label className="text-xs font-bold uppercase tracking-wider text-gray-500">Known Allergies</Label>
-                          <Input defaultValue="Penicillin, Pollen" disabled={!editing} className={`h-11 ${editing ? "bg-white" : "bg-gray-50 text-gray-600"}`} />
+                          {editing ? (
+                            <Input
+                              value={knownAllergies}
+                              onChange={e => setKnownAllergies(e.target.value)}
+                              placeholder="e.g. Penicillin, Pollen, Peanuts"
+                              className="h-11 bg-white"
+                            />
+                          ) : (
+                            <div className={`h-11 flex items-center px-3 rounded-xl border text-sm ${knownAllergies ? "bg-gray-50 border-gray-100 text-gray-800" : "bg-gray-50 border-gray-100 text-gray-400 italic"}`}>
+                              {knownAllergies || "None recorded"}
+                            </div>
+                          )}
                         </div>
                         <div className="space-y-1.5">
                           <Label className="text-xs font-bold uppercase tracking-wider text-gray-500">Medical History</Label>
-                          <textarea
-                            defaultValue="Mild asthma (2018). Appendectomy (2020). No current chronic conditions."
-                            disabled={!editing}
-                            rows={3}
-                            className={`w-full rounded-xl border px-3 py-2.5 text-sm resize-none outline-none focus:ring-2 focus:ring-sky-300 transition ${editing ? "bg-white border-gray-200" : "bg-gray-50 border-gray-100 text-gray-600"}`}
-                          />
+                          {editing ? (
+                            <textarea
+                              value={medicalHistory}
+                              onChange={e => setMedicalHistory(e.target.value)}
+                              placeholder="Describe past conditions, surgeries, chronic illnesses…"
+                              rows={3}
+                              className="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-sm resize-none outline-none focus:ring-2 focus:ring-sky-300 transition bg-white"
+                            />
+                          ) : (
+                            <div className={`min-h-[80px] px-3 py-2.5 rounded-xl border text-sm leading-relaxed ${medicalHistory ? "bg-gray-50 border-gray-100 text-gray-700" : "bg-gray-50 border-gray-100 text-gray-400 italic"}`}>
+                              {medicalHistory || "No medical history recorded"}
+                            </div>
+                          )}
                         </div>
                       </div>
 
