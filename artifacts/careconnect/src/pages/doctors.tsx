@@ -134,7 +134,7 @@ export default function Doctors() {
         <div className="flex items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3 flex-wrap">
             <p className="text-sm text-gray-500 font-medium">
-              {isLoading ? "Loading..." : `${filtered.length} doctor${filtered.length !== 1 ? "s" : ""} found`}
+              {`${filtered.length} doctor${filtered.length !== 1 ? "s" : ""} found`}
             </p>
             {activeFilters.map((f, i) => (
               <span key={i} className="flex items-center gap-1.5 bg-sky-50 border border-sky-200 text-sky-700 text-xs font-semibold px-3 py-1 rounded-full">
@@ -214,11 +214,7 @@ export default function Doctors() {
         </AnimatePresence>
 
         {/* ── GRID ── */}
-        {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1,2,3,4,5,6].map(i => <div key={i} className="glass-card h-96 animate-pulse bg-white/40" />)}
-          </div>
-        ) : filtered.length === 0 ? (
+        {filtered.length === 0 ? (
           <div className="glass-card p-16 text-center max-w-xl mx-auto">
             <div className="w-20 h-20 bg-sky-50 rounded-full flex items-center justify-center mx-auto mb-4">
               <Search className="w-8 h-8 text-sky-400" />

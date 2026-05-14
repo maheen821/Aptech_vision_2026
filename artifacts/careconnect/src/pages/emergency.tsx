@@ -571,11 +571,11 @@ export default function Emergency() {
           />
         </motion.div>
 
-        {/* Dark cinematic overlays */}
-        <div className="absolute inset-0 bg-gradient-to-br from-red-950/90 via-slate-950/80 to-blue-950/85" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(239,68,68,0.25),transparent_55%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(37,99,235,0.2),transparent_50%)]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+        {/* Dark cinematic overlays — image visible but moody */}
+        <div className="absolute inset-0 bg-gradient-to-br from-red-950/60 via-slate-950/50 to-blue-950/60" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(239,68,68,0.18),transparent_55%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(37,99,235,0.15),transparent_50%)]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/20 to-slate-950/40" />
 
         {/* Neon top bar */}
         <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent" style={{ boxShadow: "0 0 20px rgba(239,68,68,0.8)" }} />

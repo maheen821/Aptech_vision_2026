@@ -16,6 +16,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
 
+const MOCK_DOCTORS: Record<number, any> = {
+  1: { id: 1, name: "Dr. Sarah Johnson", specialty: "General Medicine", rating: 4.9, reviewCount: 340, experience: 12, fee: 120, available: true, imageUrl: "/images/team-sarah.jpg", location: "CareConnect Main Center", bio: "Experienced general physician with a focus on preventive care and holistic patient wellness." },
+  2: { id: 2, name: "Dr. Rajan Patel", specialty: "Cardiology", rating: 4.8, reviewCount: 520, experience: 15, fee: 200, available: true, imageUrl: "/images/team-rajan.jpg", location: "Heart & Vascular Institute", bio: "Board-certified cardiologist specializing in heart disease prevention and advanced cardiac care." },
+  3: { id: 3, name: "Dr. Amanda Lin", specialty: "Neurology", rating: 4.7, reviewCount: 280, experience: 10, fee: 180, available: true, imageUrl: "/images/team-amanda.jpg", location: "Metro Neuro Center", bio: "Neurologist with expertise in headache disorders, epilepsy, and movement disorders." },
+  4: { id: 4, name: "Dr. Lin Wei", specialty: "Dermatology", rating: 4.9, reviewCount: 610, experience: 18, fee: 160, available: false, imageUrl: "/images/team-lin.jpg", location: "Skin & Aesthetics Clinic", bio: "Dermatologist specializing in acne, eczema, skin cancer screenings, and cosmetic procedures." },
+  5: { id: 5, name: "Dr. Marcus Brown", specialty: "Pulmonology", rating: 4.6, reviewCount: 390, experience: 13, fee: 170, available: true, imageUrl: "/images/hero-doctor.jpg", location: "Lung & Chest Specialists", bio: "Pulmonologist with expertise in asthma, COPD, sleep apnea, and respiratory infections." },
+  6: { id: 6, name: "Dr. Elena Vazquez", specialty: "Pediatrics", rating: 4.8, reviewCount: 270, experience: 9, fee: 130, available: true, imageUrl: "/images/doctor-fallback.jpg", location: "Children's Health Center", bio: "Pediatrician dedicated to compassionate care for infants, children, and adolescents." },
+  7: { id: 7, name: "Dr. James Thompson", specialty: "Orthopedics", rating: 4.7, reviewCount: 450, experience: 16, fee: 220, available: true, imageUrl: "/images/about-feature-1.jpg", location: "Bone & Joint Institute", bio: "Orthopedic surgeon specializing in sports injuries, joint replacements, and trauma surgery." },
+  8: { id: 8, name: "Dr. Priya Sharma", specialty: "ENT", rating: 4.6, reviewCount: 320, experience: 11, fee: 150, available: true, imageUrl: "/images/about-feature-2.jpg", location: "ENT & Hearing Clinic", bio: "ENT specialist treating disorders of the ear, nose, and throat including allergies and sinusitis." },
+};
+
 const EDUCATION: Record<string, { degree: string; institution: string; year: string }[]> = {
   default: [
     { degree: "MBBS", institution: "King Edward Medical University", year: "2004" },
@@ -67,9 +78,12 @@ export default function DoctorProfile() {
   const doctorId = parseInt(id ?? "0", 10);
   const [, setLocation] = useLocation();
 
-  const { data: doctor, isLoading } = useGetDoctor(doctorId, {
+  const { data: apiDoctor, isLoading } = useGetDoctor(doctorId, {
     query: { enabled: !!doctorId, queryKey: getGetDoctorQueryKey(doctorId) },
   });
+
+  const doctor = apiDoctor ?? MOCK_DOCTORS[doctorId];
+  const showLoading = isLoading && !doctor;
 
   const [bookOpen, setBookOpen] = useState(false);
   const [date, setDate] = useState("");
@@ -98,7 +112,7 @@ export default function DoctorProfile() {
     createAppointment.mutate({ data: { doctorId: doctor.id, doctorName: doctor.name, specialty: doctor.specialty, date, time, fee: doctor.fee } });
   };
 
-  if (isLoading) {
+  if (showLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">

@@ -4,6 +4,12 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Star, ShieldCheck, Clock, CalendarCheck } from "lucide-react";
 
+const HOME_FEATURED_DOCTORS = [
+  { id: 1, name: "Dr. Sarah Johnson", specialty: "General Medicine", rating: 4.9, experience: 12, fee: 120, imageUrl: "/images/team-sarah.jpg" },
+  { id: 2, name: "Dr. Rajan Patel", specialty: "Cardiology", rating: 4.8, experience: 15, fee: 200, imageUrl: "/images/team-rajan.jpg" },
+  { id: 3, name: "Dr. Amanda Lin", specialty: "Neurology", rating: 4.7, experience: 10, fee: 180, imageUrl: "/images/team-amanda.jpg" },
+];
+
 export default function Home() {
   const { data: doctors, isLoading } = useListDoctors({}, { query: { queryKey: getListDoctorsQueryKey({}) } });
 
@@ -148,42 +154,47 @@ export default function Home() {
             </Link>
           </div>
 
-          {isLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="glass-card h-80 animate-pulse bg-white/40" />
-              ))}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {doctors?.slice(0, 3).map((doctor, i) => (
-                <motion.div 
-                  key={doctor.id}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="glass-card overflow-hidden group"
-                >
-                  <div className="h-48 overflow-hidden relative">
-                    <img src={doctor.imageUrl} alt={doctor.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-sm font-bold text-gray-900 flex items-center gap-1 shadow-sm">
-                      <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                      {doctor.rating}
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">{doctor.name}</h3>
-                    <p className="text-sky-600 font-medium mb-4">{doctor.specialty}</p>
-                    <div className="flex items-center justify-between text-sm text-gray-500">
-                      <span className="flex items-center gap-1"><Clock className="w-4 h-4"/> {doctor.experience} yrs exp</span>
-                      <span className="font-bold text-emerald-600">${doctor.fee}/visit</span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          )}
+          {(() => {
+            const featuredDocs = (doctors && doctors.length > 0) ? doctors.slice(0, 3) : HOME_FEATURED_DOCTORS;
+            return (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {featuredDocs.map((doctor, i) => (
+                  <motion.div
+                    key={doctor.id}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                  >
+                    <Link href={`/doctor/${doctor.id}`}>
+                      <div className="glass-card overflow-hidden group cursor-pointer hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <div className="h-48 overflow-hidden relative">
+                          <img
+                            src={(doctor as any).imageUrl || "/images/doctor-fallback.jpg"}
+                            alt={doctor.name}
+                            onError={e => { (e.target as HTMLImageElement).src = "/images/doctor-fallback.jpg"; }}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-sm font-bold text-gray-900 flex items-center gap-1 shadow-sm">
+                            <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                            {doctor.rating}
+                          </div>
+                        </div>
+                        <div className="p-6">
+                          <h3 className="text-xl font-bold text-gray-900 mb-1">{doctor.name}</h3>
+                          <p className="text-sky-600 font-medium mb-4">{doctor.specialty}</p>
+                          <div className="flex items-center justify-between text-sm text-gray-500">
+                            <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> {doctor.experience} yrs exp</span>
+                            <span className="font-bold text-emerald-600">${doctor.fee}/visit</span>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            );
+          })()}
         </div>
       </section>
 

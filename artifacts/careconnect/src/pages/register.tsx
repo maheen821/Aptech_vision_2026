@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link, useLocation } from "wouter";
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Mail, Lock, Phone, User, Stethoscope, ShieldCheck, Loader2, CheckCircle2, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, Phone, User, Stethoscope, ShieldCheck, Loader2, CheckCircle2, ArrowLeft, Building2, Heart } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 
@@ -49,29 +49,60 @@ export default function RegisterPage() {
     }
   };
 
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setTimeout(() => {
+      e.target.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 300);
+  };
+
   const Field = ({ label, type = "text", value, onChange, placeholder, icon: Icon, error, rightSlot }: any) => (
     <div className="space-y-1.5">
-      <label className="text-xs font-bold uppercase tracking-wider text-gray-500">{label}</label>
+      <label className="text-xs font-bold uppercase tracking-wider text-blue-200/80">{label}</label>
       <div className={`relative flex items-center rounded-xl border transition-all ${
-        error ? "border-red-400 ring-1 ring-red-200" : "border-gray-200 focus-within:border-emerald-400 focus-within:ring-2 focus-within:ring-emerald-100"
+        error
+          ? "border-red-400/60 ring-1 ring-red-400/30 bg-white/5"
+          : "border-white/15 focus-within:border-blue-400/70 focus-within:ring-2 focus-within:ring-blue-400/20 bg-white/8"
       }`}>
-        <Icon className="absolute left-3.5 w-4 h-4 text-gray-400" />
+        <Icon className="absolute left-3.5 w-4 h-4 text-blue-300/70" />
         <input
-          type={type} value={value} onChange={(e: any) => onChange(e.target.value)}
+          type={type}
+          value={value}
+          onChange={(e: any) => onChange(e.target.value)}
+          onFocus={handleFocus}
           placeholder={placeholder}
-          className="w-full h-11 pl-10 pr-10 bg-transparent text-sm text-gray-800 placeholder-gray-400 outline-none"
+          className="w-full h-12 pl-10 pr-10 bg-transparent text-sm text-white placeholder-white/30 outline-none"
         />
         {rightSlot && <div className="absolute right-3.5">{rightSlot}</div>}
       </div>
-      {error && <p className="text-xs text-red-500">{error}</p>}
+      {error && <p className="text-xs text-red-400">{error}</p>}
     </div>
   );
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-sky-50" />
-      <div className="absolute top-20 -right-40 w-96 h-96 bg-emerald-300/20 rounded-full mix-blend-multiply filter blur-3xl" />
-      <div className="absolute -bottom-20 -left-40 w-96 h-96 bg-sky-300/20 rounded-full mix-blend-multiply filter blur-3xl" />
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden bg-slate-950">
+
+      {/* Hospital blue background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-950 via-slate-950 to-sky-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(56,189,248,0.12),transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(37,99,235,0.15),transparent_50%)]" />
+
+      {/* Top accent line */}
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-sky-500 to-transparent" />
+
+      {/* Decorative hospital cross patterns */}
+      {[...Array(4)].map((_, i) => (
+        <motion.div key={i}
+          className="absolute opacity-[0.04]"
+          style={{ left: `${10 + i * 28}%`, top: `${15 + (i % 2) * 40}%` }}
+          animate={{ rotate: [0, 360] }}
+          transition={{ duration: 30 + i * 5, repeat: Infinity, ease: "linear" }}
+        >
+          <div className="relative w-8 h-8">
+            <div className="absolute inset-x-2 inset-0 bg-white rounded-sm" />
+            <div className="absolute inset-0 inset-y-2 bg-white rounded-sm" />
+          </div>
+        </motion.div>
+      ))}
 
       <motion.div
         initial={{ opacity: 0, y: 24, scale: 0.97 }}
@@ -80,22 +111,32 @@ export default function RegisterPage() {
         className="relative w-full max-w-md"
       >
         <Link href="/">
-          <span className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-emerald-600 mb-6 cursor-pointer transition-colors">
+          <span className="inline-flex items-center gap-1.5 text-sm text-blue-300/70 hover:text-blue-200 mb-6 cursor-pointer transition-colors">
             <ArrowLeft className="w-4 h-4" /> Back to Home
           </span>
         </Link>
 
-        <div className="bg-white/80 backdrop-blur-2xl rounded-3xl shadow-2xl shadow-emerald-100/40 border border-white/60 overflow-hidden">
-          <div className="h-1.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-sky-500" />
+        <div className="bg-white/5 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/10 overflow-hidden"
+          style={{ boxShadow: "0 0 60px rgba(56,189,248,0.08), 0 25px 50px rgba(0,0,0,0.4)" }}>
+
+          {/* Blue hospital top bar */}
+          <div className="h-1.5 bg-gradient-to-r from-blue-600 via-sky-400 to-blue-500" />
 
           <div className="px-8 pt-8 pb-10">
-            <div className="flex items-center gap-3 mb-7">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center shadow-lg shadow-emerald-200">
-                <Stethoscope className="w-6 h-6 text-white" strokeWidth={2.2} />
+
+            {/* Header */}
+            <div className="flex items-center gap-4 mb-8">
+              <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-500 flex items-center justify-center shadow-xl shadow-blue-900/50 shrink-0">
+                <Stethoscope className="w-7 h-7 text-white" strokeWidth={2} />
+                <div className="absolute -top-1 -right-1 w-5 h-5 bg-emerald-500 rounded-full border-2 border-slate-900 flex items-center justify-center">
+                  <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                </div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">Create Account</h1>
-                <p className="text-sm text-gray-500">Join CareConnect for free</p>
+                <h1 className="text-2xl font-bold text-white">Create Account</h1>
+                <p className="text-sm text-blue-200/60 flex items-center gap-1.5 mt-0.5">
+                  <Building2 className="w-3.5 h-3.5" /> CareConnect Healthcare Portal
+                </p>
               </div>
             </div>
 
@@ -109,17 +150,17 @@ export default function RegisterPage() {
                   label="Password" type={showPass ? "text" : "password"} value={password} onChange={setPassword}
                   placeholder="Min. 6 characters" icon={Lock} error={errors.password}
                   rightSlot={
-                    <button type="button" onClick={() => setShowPass(s => !s)} className="text-gray-400 hover:text-emerald-500 transition-colors">
+                    <button type="button" onClick={() => setShowPass(s => !s)} className="text-blue-300/60 hover:text-blue-200 transition-colors">
                       {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
                   }
                 />
                 {password.length > 0 && (
                   <div className="flex items-center gap-2 pt-1">
-                    <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+                    <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
                       <div className={`h-full rounded-full transition-all duration-300 ${strengthColor[strength]}`} style={{ width: `${(strength / 3) * 100}%` }} />
                     </div>
-                    <span className={`text-xs font-semibold ${strength === 1 ? "text-red-500" : strength === 2 ? "text-amber-500" : "text-emerald-600"}`}>
+                    <span className={`text-xs font-semibold ${strength === 1 ? "text-red-400" : strength === 2 ? "text-amber-400" : "text-emerald-400"}`}>
                       {strengthLabel[strength]}
                     </span>
                   </div>
@@ -130,39 +171,46 @@ export default function RegisterPage() {
                 label="Confirm Password" type={showConfirm ? "text" : "password"} value={confirm} onChange={setConfirm}
                 placeholder="Re-enter password" icon={Lock} error={errors.confirm}
                 rightSlot={
-                  <button type="button" onClick={() => setShowConfirm(s => !s)} className="text-gray-400 hover:text-emerald-500 transition-colors">
+                  <button type="button" onClick={() => setShowConfirm(s => !s)} className="text-blue-300/60 hover:text-blue-200 transition-colors">
                     {showConfirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                 }
               />
 
               {errors.general && (
-                <div className="flex items-center gap-2 p-3 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm">
+                <div className="flex items-center gap-2 p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm">
                   <ShieldCheck className="w-4 h-4 shrink-0" /> {errors.general}
                 </div>
               )}
 
               <button
                 type="submit" disabled={loading}
-                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold text-base shadow-lg shadow-emerald-200 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-60 mt-1"
+                className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-500 hover:to-sky-400 text-white font-bold text-base shadow-lg shadow-blue-900/50 transition-all hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-60 mt-2"
+                style={{ boxShadow: "0 0 25px rgba(56,189,248,0.2)" }}
               >
-                {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Creating account...</> : <><CheckCircle2 className="w-4 h-4" /> Create Account</>}
+                {loading
+                  ? <><Loader2 className="w-4 h-4 animate-spin" /> Creating account...</>
+                  : <><CheckCircle2 className="w-4 h-4" /> Create Account</>
+                }
               </button>
 
-              <p className="text-center text-sm text-gray-500 pt-1">
+              <p className="text-center text-sm text-white/40 pt-1">
                 Already have an account?{" "}
                 <Link href="/login">
-                  <span className="text-sky-600 font-bold hover:underline cursor-pointer">Login</span>
+                  <span className="text-sky-400 font-bold hover:text-sky-300 cursor-pointer transition-colors">Login</span>
                 </Link>
               </p>
             </form>
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-4 mt-5 text-xs text-gray-400">
-          <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Secure & Private</span>
+        {/* Trust badges */}
+        <div className="flex items-center justify-center gap-4 mt-5 text-xs text-white/30">
+          <span className="flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-blue-400/60" /> Secure & Private</span>
           <span>·</span>
-          <span className="flex items-center gap-1"><Stethoscope className="w-3.5 h-3.5 text-sky-400" /> HIPAA-Compliant</span>
+          <span className="flex items-center gap-1.5"><Heart className="w-3.5 h-3.5 text-rose-400/60" /> HIPAA-Compliant</span>
+          <span>·</span>
+          <span className="flex items-center gap-1.5"><Stethoscope className="w-3.5 h-3.5 text-sky-400/60" /> Free to Join</span>
         </div>
       </motion.div>
     </div>
