@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
-import { Mail, Phone, MapPin, Heart, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin, Heart, ArrowRight, Stethoscope } from "lucide-react";
 
 const quickLinks = [
   { href: "/", label: "Home" },
@@ -38,10 +38,12 @@ export function Footer() {
             {/* Brand column */}
             <div className="lg:col-span-1">
               <Link href="/" className="inline-flex items-center gap-2 mb-5 group">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-emerald-500 flex items-center justify-center text-lg shadow-lg shadow-sky-500/30">
-                  🏥
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-emerald-500 flex items-center justify-center shadow-lg shadow-sky-500/30">
+                  <Stethoscope className="w-5 h-5 text-white" strokeWidth={2.2} />
                 </div>
-                <span className="text-xl font-bold text-white tracking-tight">CareConnect</span>
+                <span className="text-2xl font-black tracking-tight">
+                  <span className="text-sky-400">Care</span><span className="text-emerald-400">Connect</span>
+                </span>
               </Link>
               <p className="text-gray-400 text-sm leading-relaxed mb-6">
                 Smart Healthcare Assistant for everyone. Connecting you with the best doctors, faster and smarter.

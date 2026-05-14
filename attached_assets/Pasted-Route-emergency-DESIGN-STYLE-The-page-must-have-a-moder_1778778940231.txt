@@ -1,0 +1,326 @@
+Route:
+
+/emergency
+
+🎨 DESIGN STYLE
+
+The page must have a modern emergency medical dashboard UI with:
+
+Red + dark blue emergency healthcare theme
+Premium glassmorphism design
+Emergency neon glow effects
+Modern SaaS hospital dashboard look
+Fully responsive design
+Framer Motion / AOS animations
+Professional emergency healthcare experience
+❌ IMPORTANT REMOVE THIS FEATURE
+
+🚫 DO NOT show a floating red emergency button globally on every page using z-index.
+
+👉 The emergency button should ONLY appear inside the /emergency hero section.
+
+NO fixed emergency floating button globally.
+
+🚨 HERO SECTION (TOP BANNER)
+
+Create a full-width emergency hero section with:
+
+Background:
+Emergency hospital room visuals
+Ambulance visuals
+Emergency healthcare AI illustrations
+Dark red/blue overlay gradient
+Hero Content:
+🚨 Title:
+“Emergency Assistance”
+Subtitle:
+
+“Get immediate medical help, connect with emergency doctors, and find nearby hospitals instantly.”
+
+🔍 LOCATION SEARCH SECTION (IMPORTANT ⭐)
+
+Add a modern animated search bar where user can type:
+
+City name
+Area name
+Location
+
+Examples:
+
+Karachi
+Gulshan
+DHA
+North Nazimabad
+⚡ DYNAMIC SEARCH FUNCTIONALITY
+
+When user searches a location:
+
+👉 Dynamically display nearby hospitals cards with:
+
+Hospital image
+Hospital name
+Emergency badge
+Distance
+Address
+Emergency services available
+Rating ⭐
+Contact number
+🏥 HOSPITAL CARD BUTTONS
+📍 View Location
+
+👉 Opens modern Google-map-style modal popup
+
+Show:
+
+Hospital location preview
+Estimated travel time
+Interactive map UI container
+📞 Call Hospital
+
+👉 MUST WORK DYNAMICALLY
+
+When clicked:
+
+Open modern hospital calling interface popup with:
+
+Hospital image
+Hospital name
+Calling animation
+Ringing sound effect simulation
+End Call button
+Mute button
+Call duration timer
+
+Modern mobile call screen design.
+
+💬 Chat Hospital
+
+👉 MUST WORK DYNAMICALLY
+
+When clicked:
+
+Open live hospital support chat modal with:
+
+Hospital logo/image
+Online support status
+Real-time chat UI
+Chat bubbles
+Auto-reply simulation
+Message input box
+Send button
+
+Modern healthcare support chat interface.
+
+🏥 HOSPITAL RESULTS SECTION
+
+Use premium animated hospital cards layout.
+
+Each card includes:
+
+Large hospital image
+Hospital name
+City/area
+Emergency availability
+Rating ⭐
+Contact number
+Emergency services tags
+
+Add:
+
+Hover glow effect
+Smooth card animation
+Glassmorphism design
+Map-style modern layout
+🗺️ GOOGLE MAP STYLE UI
+
+Add:
+
+Nearby hospitals preview section
+Live location-style UI
+Travel time preview
+Interactive healthcare map container
+👨‍⚕️ EMERGENCY DOCTORS SECTION (VERY IMPORTANT ⭐)
+
+Show RANDOM emergency specialist cards dynamically.
+
+Doctor categories:
+
+Cardiologist
+Emergency Physician
+Trauma Specialist
+Neurologist
+Pulmonologist
+EACH DOCTOR CARD MUST INCLUDE:
+Doctor picture
+Name
+Specialty
+Availability status
+Rating ⭐
+Emergency consultation fee
+🔘 DOCTOR CARD BUTTONS
+💬 Chat
+
+👉 MUST WORK DYNAMICALLY
+
+When clicked:
+
+Open modern doctor chat popup with:
+
+Doctor profile image
+Online status
+Live messaging interface
+Chat bubbles
+Typing animation
+Message input field
+Send button
+Auto-reply simulation
+
+Modern healthcare messaging UI.
+
+📞 Call
+
+👉 MUST WORK DYNAMICALLY
+
+When clicked:
+
+Open modern doctor calling popup with:
+
+Doctor image
+Calling animation
+Ringing effect simulation
+End call button
+Speaker button
+Mute button
+Call timer
+
+Premium mobile call interface design.
+
+📅 Book
+
+👉 MUST WORK DYNAMICALLY
+
+When clicked:
+
+Open emergency appointment booking modal with:
+
+Patient name field
+Phone number
+Select date
+Select time
+Emergency notes textarea
+
+Button:
+
+“Confirm Emergency Appointment”
+
+After submit:
+
+Show success animation
+Appointment confirmation card
+💬 CHAT SYSTEM REQUIREMENTS
+
+Both hospital & doctor chat systems must support:
+
+Dynamic popup modals
+Scrollable message area
+Auto-reply simulation
+Animated typing dots
+Real-time style UI
+Message timestamps
+Close/minimize buttons
+📞 CALL SYSTEM REQUIREMENTS
+
+Both hospital & doctor call systems must support:
+
+Dynamic calling popup
+Calling animation
+Call timer
+End call functionality
+Mute button
+Speaker button
+Animated pulse effect
+🚑 EMERGENCY SERVICES SECTION
+
+Modern animated emergency service cards:
+
+🚑 Ambulance Support
+🏥 Emergency Hospital Access
+👨‍⚕️ Instant Doctor Recommendation
+📞 Emergency Contact Assistance
+
+Use:
+
+Glow icons
+Hover lift effect
+Emergency neon UI
+Gradient glass cards
+⚠️ EMERGENCY ALERT BOX
+
+Animated warning card:
+
+⚠️ “If the patient is unconscious or having breathing difficulty, contact emergency services immediately.”
+
+Use:
+
+Flash animation
+Red neon border
+Warning icon
+Pulse glow effect
+🎨 UI STYLE REQUIREMENTS
+
+Use:
+
+Dark emergency overlay
+Red neon medical effects
+Blue emergency gradients
+Glassmorphism cards
+Soft shadows
+Premium emergency dashboard UI
+🎬 ANIMATIONS (MANDATORY)
+
+Use:
+
+Pulse effects
+Fade-in transitions
+Hover zoom cards
+Smooth modal animations
+Glow effects
+Slide-up panels
+Loading animations
+
+Use Framer Motion.
+
+🖼️ IMAGE REQUIREMENTS
+
+Use:
+
+Emergency hospitals
+Ambulance visuals
+Emergency doctors
+Medical emergency rooms
+Healthcare AI visuals
+⚡ TECH REQUIREMENTS
+React.js functional components
+React Router DOM
+Framer Motion animations
+Responsive grid system
+Reusable UI components
+Modal popup system
+Dynamic chat UI component
+Dynamic call UI component
+Dynamic booking modal component
+Modern emergency healthcare UI
+🏆 FINAL OUTPUT
+
+Create a premium futuristic emergency healthcare page with:
+
+✔ Dynamic location-based hospital search
+✔ Animated hospital cards with images
+✔ Dynamic doctor recommendation cards
+✔ Working Chat / Call / Book features
+✔ Dynamic doctor & hospital chat system
+✔ Dynamic hospital & doctor calling UI
+✔ Emergency booking modal
+✔ Google-map-style location preview
+✔ Fully responsive animated emergency dashboard
+✔ Professional hospital SaaS emergency experience
